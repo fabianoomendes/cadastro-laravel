@@ -4,6 +4,9 @@ namespace App\Models\Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class Usuario extends Model
 {
@@ -18,6 +21,7 @@ class Usuario extends Model
             "id",
             "nome",
             "email",
+            "senha",
             "date_cadastro"
         ])
         ->limit($limite);
@@ -30,9 +34,8 @@ class Usuario extends Model
         $sql = self::insert([
             "nome" => $request->input('nome'),
             "email" => $request->input('email'),
-            "data_cadastro" => $request->input('data_cadastro'),
+            "senha" => Hash::make($request->input('senha')),
             "data_cadastro" => DB::raw('NOW()')
-            
         ]);
 
         dd($sql->toSql(), $request->all());
