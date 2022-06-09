@@ -23,11 +23,11 @@ class Usuario extends Model
             "nome",
             "email",
             "senha",
-            "date_cadastro"
+            "data_cadastro"
         ])
         ->limit($limite);
 
-        dd($sql->tosql());
+        return $sql->get();
     }
 
     public static function cadastrar(Request $request)
